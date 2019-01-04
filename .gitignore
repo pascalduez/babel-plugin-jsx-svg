@@ -1,0 +1,7 @@
+dist
+node_modules
+coverage
+flow-coverage
+.eslintcache
+.jest-cache
+.cache
