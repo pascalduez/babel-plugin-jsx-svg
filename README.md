@@ -28,6 +28,7 @@ yarn add babel-plugin-jsx-svg --save-dev
     [
       "babel-plugin-jsx-svg",
       {
+        "packageName": "somelib",
         "elementName": "Svg",
         "elementProp": "name",
         "propertyName": "icon",
@@ -71,24 +72,33 @@ import { SvgFoo } from 'somelib';
 
 ## options
 
+### `packageName`
+
+type: `String`  
+required: `true`
+
 ### `elementName`
 
 type: `String`  
+required: `false`  
 default: `Svg`
 
 ### `elementProp`
 
 type: `String`  
+required: `false`  
 default: `name`
 
 ### `propertyName`
 
 type: `String`  
+required: `false`  
 default: `icon`
 
 ### `componentPrefix`
 
 type: `String`  
+required: `false`  
 default: `Svg`
 
 ## Credits

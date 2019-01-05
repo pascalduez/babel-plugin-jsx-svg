@@ -40,11 +40,13 @@ export default declare((api, options) => {
 
         const lastImport = path
           .get('body')
-          .filter(p => p.isImportDeclaration())
+          .filter(path => path.isImportDeclaration())
           .pop();
 
         if (lastImport) {
           lastImport.insertAfter(createImportDeclaration(path, state));
+        } else {
+          path.unshiftContainer('body', createImportDeclaration(path, state));
         }
       },
     },
@@ -56,10 +58,8 @@ export default declare((api, options) => {
 
       state.specifiers = path
         .get('specifiers')
-        .map(
-          specifier =>
-            specifier.isImportSpecifier() && specifier.get('imported').node.name
-        );
+        .filter(specifier => specifier.isImportSpecifier())
+        .map(specifier => specifier.get('imported').node.name);
     },
 
     JSXAttribute(path, state) {
@@ -92,7 +92,7 @@ export default declare((api, options) => {
         elementProp
       );
 
-      if (!prop) {
+      if (!prop || !t.isStringLiteral(prop.value)) {
         return;
       }
 
